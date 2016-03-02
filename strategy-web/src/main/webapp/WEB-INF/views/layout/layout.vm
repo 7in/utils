@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"    content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+    <title>Strategy - by CN QA</title>
+
+    <link rel="shortcut icon" href="/resources/assets/default/images/gt_favicon.png">
+
+    <link rel="stylesheet" href="/resources/assets/default/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/assets/default/css/font-awesome.min.css">
+
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="/resources/assets/default/css/bootstrap-theme.css" media="screen" >
+    <link rel="stylesheet" href="/resources/assets/default/css/main.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/resources/assets/default/js/html5shiv.js"></script>
+    <script src="/resources/assets/default/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+    <script src="/resources/assets/default/js/jquery-1.11.3.min.js"></script>
+    <script src="/resources/assets/default/js/bootstrap.min.js"></script>
+    <script src="/resources/assets/default/js/headroom.min.js"></script>
+    <script src="/resources/assets/default/js/jQuery.headroom.min.js"></script>
+    <script src="/resources/assets/default/js/template.js"></script>
+    <script type="text/javascript">
+        function setFullScreen(){
+            var total = document.documentElement.clientHeight;
+            var colHeight = total-document.getElementById("navbar").offsetTop;
+            var mainHeight = document.getElementById("main-container").offsetHeight;
+            if(mainHeight<colHeight){
+                document.getElementById("main-container").style.height=colHeight+"px";
+            }
+        };
+        jQuery(document).ready(function () {
+            setFullScreen();
+        });
+    </script>
+</head>
+
+<body class="home">
+    #parse("common/header.vm")
+
+<div class="main-container" id="main-container">
+
+
+        <!-- PAGE CONTENT BEGINS -->
+        $screen_content
+        <!-- PAGE CONTENT ENDS -->
+
+    #parse("common/footer.vm")
+
+</div><!-- /.main-container -->
+
+</body>
+</html>

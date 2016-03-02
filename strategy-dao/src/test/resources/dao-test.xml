@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- ======================================== -->
+    <!-- 引入资源文件 -->
+    <!-- ======================================== -->
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:antx.properties"/>
+    <import resource="classpath:spring/dao-beans.xml"/>
+    <import resource="classpath:spring/datasource-beans.xml"/>
+
+
+</beans>

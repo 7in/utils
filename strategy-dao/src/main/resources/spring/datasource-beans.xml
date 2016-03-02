@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- TDDL 数据源-->
+    <bean id="tddlDataSource" class="com.taobao.tddl.group.jdbc.TGroupDataSource" init-method="init">
+        <property name="appName" value="CAINIAO_QA_APP" />
+        <property name="dbGroupKey" value="CAINIAO_QA_GROUP" />
+    </bean>
+    <!-- TDDL end-->
+
+</beans>

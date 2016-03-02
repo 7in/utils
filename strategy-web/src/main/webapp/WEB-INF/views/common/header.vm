@@ -1,0 +1,39 @@
+<!-- Fixed navbar -->
+<div id="navbar" class="navbar navbar-inverse navbar-fixed-top headroom" >
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Button for smallest screens -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand" href="home"><img src="/resources/assets/default/images/logo.png" alt="Progressus HTML5 template"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+                <li class="active"><a href="home">Home</a></li>
+                <li><a href="about">About</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ruleBusiness">业务场景</a></li>
+                        <li><a href="ruleFlow">规则流</a></li>
+                        <li><a href="ruleUnit">规则单元</a></li>
+                        <li><a href="ruleDimension">规则类别</a></li>
+                        <li><a href="ruleBusinessExecute">业务规则执行</a></li>
+                        <li><a href="ruleFlowExecute">规则流执行</a></li>
+                        <li><a href="ruleUnitExecute">规则单元执行</a></li>
+                    </ul>
+                </li>
+                #if($!envCode=="DAILY")
+                    <li><a
+                            href="http://solo.cainiao-inc.com$!requestUri" target="_self">$!envDesc / 切到线上</a></li>
+                    <li>
+                 #end
+                #if($!envCode=="PRE" || $!envCode=="ONLINE" )
+                    <li><a
+                            href="http://solo.daily.cainiao-inc.net$!requestUri" target="_self">$!envDesc / 切到日常</a></li>
+                    <li>
+                #end
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /.navbar -->

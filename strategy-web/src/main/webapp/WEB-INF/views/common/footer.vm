@@ -1,0 +1,19 @@
+
+<footer id="footer">
+    <div class="footer2">
+        <div class="container">
+            <div class="row">
+
+                <div class=".col-lg-12 widget">
+                    <div class="widget-body">
+                        <p class="text-center">
+                            Copyright &copy; 2016, Designed by <a href="#" rel="designer">菜鸟测试质量发展</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div> <!-- /row of widgets -->
+        </div>
+    </div>
+</footer>
+	

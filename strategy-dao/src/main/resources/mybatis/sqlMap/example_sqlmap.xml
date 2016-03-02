@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cainiao.solo.dao.RuleUnitDAO">
+
+    <resultMap id="ruleResult" type="com.cainiao.solo.entity.RuleUnitDO">
+
+        <result property="id" column="id"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="isDeleted" column="is_deleted"/>
+
+        <result property="dimensionId" column="dimension_id"/>
+        <result property="switchFlag" column="switch_flag"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="type" column="type"/>
+        <result property="parameter" column="parameter"/>
+        <result property="msg" column="msg"/>
+    </resultMap>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="RuleUnitDO" keyProperty="id">
+        insert into rule_unit
+        (id,gmt_create,gmt_modified,is_deleted,dimension_id,name,code,type,parameter,msg,switch_flag)
+        values (#{id},now(),now(),0,#{dimensionId},#{name},#{code},#{type},#{parameter},#{msg},#{switchFlag})
+        <selectKey resultType="long" keyProperty="id">
+            select @@IDENTITY
+            AS id
+        </selectKey>
+    </insert>
+
+    <!--删除 -->
+    <delete id="delete" parameterType="long">
+		update rule_unit set gmt_modified = now(),is_deleted = 1 where id = #{id}
+	</delete>
+
+    <delete id="deleteAll" parameterType="list">
+        update rule_unit set gmt_modified = now(),is_deleted = 1 where id
+        IN
+
+        <foreach item="ids" index="index" open="(" separator="," collection="list" close=")">
+            #{ids}
+        </foreach>
+        AND is_deleted = 0
+    </delete>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="RuleUnitDO">
+        update rule_unit set gmt_modified = now()
+        <if test="isDeleted!=null and isDeleted!=''">
+            , is_deleted = #{isDeleted}
+        </if>
+        <if test="dimensionId!=null and !=''">
+            , dimension_id = #{dimensionId}
+        </if>
+        <if test="name!=null and name!=''">
+            , name = #{name}
+        </if>
+        <if test="code!=null and code!=''">
+            , code = #{code}
+        </if>
+        <if test="type!=null and type!=''">
+            , type = #{type}
+        </if>
+        <if test="parameter!=null and parameter!=''">
+            , parameter = #{parameter}
+        </if>
+        <if test="msg!=null and msg!=''">
+            , msg = #{msg}
+        </if>
+        <if test="switchFlag!=null and switchFlag!=''">
+            , switch_flag = #{switchFlag}
+        </if>
+        where id = #{id}
+    </update>
+
+    <!--查询
+        查询条件说明：
+            id,name,dimensionId,code,type,switchFlag 至少有一个不为空（程序限制）、
+            组合：这里没有组合，只是单个查询。
+            场景：1.查询所有没有被删除的rule_unit，数据量较少（规则单元列表页面）
+                  2.其它动态组合部分在这个版本没有用到。
+     -->
+    <select id="queryListObject" resultMap="ruleResult" parameterType="RuleUnitDO">
+        select
+        id,gmt_create,gmt_modified,is_deleted,dimension_id,name,code,type,parameter,msg,switch_flag
+        from rule_unit
+        where
+        is_deleted = #{isDeleted}
+        <if test="id!=null and id!=''">
+            AND id = #{id}
+        </if>
+        <if test="dimensionId!=null and dimensionId!=''">
+            AND dimension_id = #{dimensionId}
+        </if>
+        <if test="name!=null and name!=''">
+            AND name = #{name}
+        </if>
+        <if test="code!=null and code!=''">
+            AND code = #{code}
+        </if>
+        <if test="type!=null and type!=''">
+            AND type = #{type}
+        </if>
+        <if test="switchFlag!=null and switchFlag!=''">
+            AND switch_flag = #{switchFlag}
+        </if>
+    </select>
+
+    <select id="queryOneObject" resultMap="ruleResult" parameterType="long">
+		select 
+		id,gmt_create,gmt_modified,is_deleted,dimension_id,name,code,type,parameter,msg,switch_flag
+		from rule_unit 
+		where 
+		id = #{id} 
+		AND 
+		is_deleted = 0
+	</select>
+
+</mapper>
+	    
