@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="gb2312"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
@@ -10,32 +10,32 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!--<context:property-placeholder location="antx.properties" />-->
 
-	<!--ç¼–ç è¿‡æ»¤-->
+	<!--±àÂë¹ýÂË-->
 	<bean id="encodingFilterBean" class="org.springframework.web.filter.CharacterEncodingFilter">
 		<property name="encoding" value="${web.encoding}" />
 		<property name="forceEncoding" value="false" />
 	</bean>
 
 	<!--sso-->
-	<!--<bean id="ssoFilterBean" class="com.alibaba.buc.sso.client.filter.SSOFilter">-->
-		<!--<property name="initParams" >-->
-			<!--<map>-->
-				<!-- ps:ä¿®æ”¹app_nameæˆåœ¨åº”ç”¨æŽ¥å…¥æ–¹çš„åº”ç”¨åï¼Œæ­¤åº”ç”¨åä¼šåœ¨bucç³»ç»Ÿä¸Šæ³¨å†Œ-->
-				<!--<entry key="APP_NAME" value="${sso.app.name}" />-->
-				<!--<entry key="SSO_CALLBACK_CLASS" value="com.alibaba.buc.sso.client.handler.impl.BucSSOCallBack" />-->
-				<!-- çº¿ä¸Šåº”ç”¨SSè¯·ä½¿ç”¨:  https://login.alibaba-inc.com æ—¥å¸¸:https://login-test.alibaba-inc.com  -->
-				<!--<entry key="SSO_SERVER_URL" value="${sso.server.url}" />-->
-				<!-- è¯·ä¿®æ”¹ä¸ºæ³¨å†Œæ—¶ç”±BUC é¢å‘çš„å€¼  -->
-				<!--<entry key="CLIENT_KEY" value="${sso.app.key}" />-->
-				<!--<entry key="CLIENT_KEY" value="dd36825f-4b25-4c0e-85d4-1816389e7a09" />-->
-				<!--ä¸èµ°ssoéªŒè¯çš„requestUri(åº”ç”¨è¯·æ ¹æ®å®žé™…æƒ…å†µä¿®æ”¹)ï¼Œurié—´ç”¨åŠè§’é€—å·éš”å¼€ã€‚*é€šé…ä»»æ„å¤šä¸ªå­—ç¬¦ï¼Œ?é€šé…ä»»æ„å•ä¸ªå­—ç¬¦-->
-				<!--<entry key="EXCLUSIONS" value="*/status.taobao,/checkpreload.htm,/login.htm,/logout.htm,/static/*" />-->
-			<!--</map>-->
-		<!--</property>-->
-	<!--</bean>-->
+	<bean id="ssoFilterBean" class="com.alibaba.buc.sso.client.filter.SSOFilter">
+	<property name="initParams" >
+	<map>
+	<!-- ps:ÐÞ¸Äapp_name³ÉÔÚÓ¦ÓÃ½ÓÈë·½µÄÓ¦ÓÃÃû£¬´ËÓ¦ÓÃÃû»áÔÚbucÏµÍ³ÉÏ×¢²á-->
+	<entry key="APP_NAME" value="strategy" />
+	<entry key="SSO_CALLBACK_CLASS" value="com.alibaba.buc.sso.client.handler.impl.BucSSOCallBack" />
+	<!-- ÏßÉÏÓ¦ÓÃSSÇëÊ¹ÓÃ:  https://login.alibaba-inc.com ÈÕ³£:https://login-test.alibaba-inc.com  -->
+	<!--<entry key="SSO_SERVER_URL" value="${sso.server.url}" />-->
+	<entry key="SSO_SERVER_URL" value="https://login.alibaba-inc.com" />
+	 <!--ÇëÐÞ¸ÄÎª×¢²áÊ±ÓÉBUC °ä·¢µÄÖµ  -->
+	<entry key="CLIENT_KEY" value="${sso.app.key}" />
+	<!--²»×ßssoÑéÖ¤µÄrequestUri(Ó¦ÓÃÇë¸ù¾ÝÊµ¼ÊÇé¿öÐÞ¸Ä)£¬uri¼äÓÃ°ë½Ç¶ººÅ¸ô¿ª¡£*Í¨ÅäÈÎÒâ¶à¸ö×Ö·û£¬?Í¨ÅäÈÎÒâµ¥¸ö×Ö·û-->
+	<entry key="EXCLUSIONS" value="*/status.taobao,/checkpreload.htm,/login.htm,/logout.htm,/static/*" />
+	</map>
+	</property>
+	</bean>
 
-	<!--åŽ»é™¤ç©ºæ ¼-->
-	<bean id="trimParametersFilterBean" class="com.cainiao.strategy.web.filter.TrimParametersFilter" />
+	<!--È¥³ý¿Õ¸ñ-->
+	<bean id="trimParametersFilterBean" class="com.simon7in.strategy.web.filter.TrimParametersFilter" />
 
 	<!--
 		CSRF protection. Here we only include the CsrfFilter instead of all of Spring Security.
@@ -53,6 +53,6 @@
 	-->
 	<bean id="requestDataValueProcessor" class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor"/>
 
-	<!--æ³¨å…¥ä¸šåŠ¡å±‚bin-->
+	<!--×¢ÈëÒµÎñ²ãbin-->
 	<import resource="beans.xml" />
 </beans>

@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    //页面加载完毕后，初始化分页组件
+    function initpagination(pageNumber,pageIndex,totalCounts){
+        if(pageNumber == '' || parseInt(pageNumber) < 1) pageNumber=1;
+        if(pageIndex == '' || parseInt(pageIndex) < 1) pageIndex=1;
+        if(totalCounts == '' || parseInt(totalCounts) < 1) totalCounts=1;
+        $('.recordListTable').jqPaginator({
+//            用parseInt转换成数字
+            totalPages: parseInt(pageNumber),
+            visiblePages: 8,
+            currentPage: parseInt(pageIndex),
+            totalCounts:parseInt(totalCounts),
+            first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
+            prev: '<li class="prev"><a href="javascript:void(0);"><<<\/a><\/li>',
+            next: '<li class="next"><a href="javascript:void(0);">>><\/a><\/li>',
+            last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
+            page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
+            onPageChange: function (num, type) {
+                if(type=='init') return;
+                //必须在表单中增加<input type="hidden" name="currentPage" id="currentPage" value="">隐藏域
+                $("#currentPage").val(num);
+                //post提交
+                $("form#pageQuery").submit();
+            }
+        });
+    };
+    //分页组件初始化完毕
+</script>
+<!--信息栏：总条数，总页数，分页栏等等-->
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <input type="hidden" name="page" value="1" id="pages">
+        <input type="hidden" id="totalPage" value="$!{totalPage}">
+        <input type="hidden" name="totalCounts" id="totalCounts" value="$!{totalCounts}">
+        <ul class="recordListTable pagination">
+
+        </ul>
+    </div>
+</div>
+<!--信息栏：总条数，总页数，分页栏等等   结束-->
+	

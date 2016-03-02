@@ -12,7 +12,7 @@
 
     <appender name="DEBUG"
               class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${loggingRoot}/solo-debug.log"/>
+        <param name="File" value="${loggingRoot}/strategy-debug.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="1000KB"/>
         <param name="MaxBackupIndex" value="1"/>
@@ -28,7 +28,7 @@
 
     <appender name="INFO"
               class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${loggingRoot}/solo-info.log"/>
+        <param name="File" value="${loggingRoot}/strategy-info.log"/>
         <param name="DatePattern" value="yyyy-MM-dd'.log'" />
 
         <layout class="org.apache.log4j.PatternLayout">
@@ -43,7 +43,7 @@
 
     <appender name="WARN"
               class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${loggingRoot}/solo-warn.log"/>
+        <param name="File" value="${loggingRoot}/strategy-warn.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="1000KB"/>
         <param name="MaxBackupIndex" value="1"/>
@@ -59,7 +59,7 @@
 
     <appender name="ERROR"
               class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${loggingRoot}/solo-error.log"/>
+        <param name="File" value="${loggingRoot}/strategy-error.log"/>
         <param name="DatePattern" value="yyyy-MM-dd'.log'" />
 
         <layout class="org.apache.log4j.PatternLayout">

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simon7in.strategy.dao.PlaybackRecordDAO">
+
+    <resultMap id="ruleResult" type="com.simon7in.strategy.entity.PlaybackRecordDO">
+
+        <result property="id" column="id"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="isDeleted" column="is_deleted"/>
+
+        <result property="industry" column="industry"/>
+        <result property="staff" column="staff"/>
+        <result property="status" column="status"/>
+        <result property="attribute" column="attribute"/>
+        <result property="msg" column="msg"/>
+    </resultMap>
+
+    <!-- 插入 -->
+    <insert id="insert" parameterType="PlaybackRecordDO" keyProperty="id">
+        insert into playback_record
+        (id,gmt_create,gmt_modified,is_deleted,industry,staff,status,attribute,msg)
+        values (#{id},now(),now(),0,#{industry},#{staff},#{status},#{attribute},#{msg})
+        <selectKey resultType="long" keyProperty="id">
+            select @@IDENTITY
+            AS id
+        </selectKey>
+    </insert>
+
+    <!--删除 -->
+    <delete id="delete" parameterType="long">
+		update playback_record set gmt_modified = now(),is_deleted = 1 where id = #{id}
+	</delete>
+
+    <delete id="deleteAll" parameterType="list">
+        update playback_record set gmt_modified = now(),is_deleted = 1 where id
+        IN
+
+        <foreach item="ids" index="index" open="(" separator="," collection="list" close=")">
+            #{ids}
+        </foreach>
+        AND is_deleted = 0
+    </delete>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="PlaybackRecordDO">
+        update playback_record set gmt_modified = now()
+        <if test="isDeleted!=null and isDeleted!=''">
+            , is_deleted = #{isDeleted}
+        </if>
+        <if test="industry!=null and industry!=''">
+            , industry = #{industry}
+        </if>
+        <if test="staff!=null and staff!=''">
+            , staff = #{staff}
+        </if>
+        <if test="status!=null and status!=''">
+            , status = #{status}
+        </if>
+        <if test="msg!=null and msg!=''">
+            , msg = #{msg}
+        </if>
+        <if test="attribute!=null and attribute!=''">
+            , attribute = #{attribute}
+        </if>
+        where id = #{id}
+    </update>
+
+    <!--查询
+        查询条件说明：
+            id,name,dimensionId,code,type,switchFlag 至少有一个不为空（程序限制）、
+            组合：这里没有组合，只是单个查询。
+            场景：1.查询所有没有被删除的rule_unit，数据量较少（规则单元列表页面）
+                  2.其它动态组合部分在这个版本没有用到。
+     -->
+    <select id="queryListObject" resultMap="ruleResult" parameterType="PlaybackRecordDO">
+        select
+        id,gmt_create,gmt_modified,is_deleted,industry,staff,status,attribute,msg
+        from playback_record
+        where
+        is_deleted = 0
+        <if test="id!=null and id!=''">
+            AND id = #{id}
+        </if>
+        <if test="industry!=null and industry!=''">
+            AND industry = #{industry}
+        </if>
+        <if test="staff!=null and staff!=''">
+            AND staff = #{staff}
+        </if>
+        <if test="status!=null and status!=''">
+            AND status = #{status}
+        </if>
+        <if test="msg!=null and msg!=''">
+            AND msg = #{msg}
+        </if>
+        <if test="attribute!=null and attribute!=''">
+            AND attribute = #{attribute}
+        </if>
+        <if test="startRow!=null">
+            <if test="pageSize!=null">
+                order by id desc
+                <![CDATA[LIMIT #{startRow}, #{pageSize}]]>
+            </if>
+        </if>
+    </select>
+
+    <select id="queryOneObject" resultMap="ruleResult" parameterType="long">
+		select 
+		id,gmt_create,gmt_modified,is_deleted,industry,staff,status,attribute,msg
+		from playback_record
+		where 
+		id = #{id} 
+		AND 
+		is_deleted = 0
+	</select>
+
+    <select id="getResultCount" resultType="long" parameterType="PlaybackRecordDO">
+        select
+        count(*)
+        from playback_record
+        where
+        is_deleted = 0
+        <if test="id!=null and id!=''">
+            AND id = #{id}
+        </if>
+        <if test="industry!=null and industry!=''">
+            AND industry = #{industry}
+        </if>
+        <if test="staff!=null and staff!=''">
+            AND staff = #{staff}
+        </if>
+        <if test="status!=null and status!=''">
+            AND status = #{status}
+        </if>
+        <if test="msg!=null and msg!=''">
+            AND msg = #{msg}
+        </if>
+        <if test="attribute!=null and attribute!=''">
+            AND attribute = #{attribute}
+        </if>
+    </select>
+</mapper>
+	    

@@ -13,23 +13,18 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="ruleBusiness">业务场景</a></li>
-                        <li><a href="ruleFlow">规则流</a></li>
-                        <li><a href="ruleUnit">规则单元</a></li>
-                        <li><a href="ruleDimension">规则类别</a></li>
-                        <li><a href="ruleBusinessExecute">业务规则执行</a></li>
-                        <li><a href="ruleFlowExecute">规则流执行</a></li>
-                        <li><a href="ruleUnitExecute">规则单元执行</a></li>
+                        <li><a href="#">场景列表</a></li>
+                        <li><a href="#">执行结果</a></li>
                     </ul>
                 </li>
                 #if($!envCode=="DAILY")
                     <li><a
-                            href="http://solo.cainiao-inc.com$!requestUri" target="_self">$!envDesc / 切到线上</a></li>
+                            href="http://www.baidu.com$!requestUri" target="_self">$!envDesc / 切到线上</a></li>
                     <li>
                  #end
                 #if($!envCode=="PRE" || $!envCode=="ONLINE" )
                     <li><a
-                            href="http://solo.daily.cainiao-inc.net$!requestUri" target="_self">$!envDesc / 切到日常</a></li>
+                            href="http://www.baidu.com$!requestUri" target="_self">$!envDesc / 切到日常</a></li>
                     <li>
                 #end
             </ul>

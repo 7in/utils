@@ -19,7 +19,6 @@
     </properties>
 
     <dependencies>
-
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -146,6 +145,26 @@
             <artifactId>junit</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.taobao.hsf</groupId>
+            <artifactId>hsf-standalone</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.taobao.hsf</groupId>
+            <artifactId>hsf.app.spring</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.taobao.test</groupId>
+            <artifactId>itest</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.taobao.hsf</groupId>
+            <artifactId>hsfunit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <!--用于xml的对比解析-->
             <groupId>xmlunit</groupId>
             <artifactId>xmlunit</artifactId>
@@ -160,6 +179,7 @@
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>

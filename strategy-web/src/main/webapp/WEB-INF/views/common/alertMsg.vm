@@ -1,0 +1,6 @@
+<article class="col-xs-12 maincontent">
+    <header class="page-header">
+        <h1 class="page-title">Alert message</h1>
+        <p>$!msg</p>
+    </header>
+</article>

@@ -6,6 +6,8 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        "
        default-autowire="byName">
-
+    <!--import xml here-->
+    <import resource="local-biz.xml"/>
+    <import resource="notify-beans.xml"/>
 
 </beans>

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
-    <title>Strategy - by CN QA</title>
+    <title>Strategy</title>
 
     <link rel="shortcut icon" href="/resources/assets/default/images/gt_favicon.png">
 
@@ -28,6 +28,13 @@
     <script src="/resources/assets/default/js/headroom.min.js"></script>
     <script src="/resources/assets/default/js/jQuery.headroom.min.js"></script>
     <script src="/resources/assets/default/js/template.js"></script>
+    <!--背景浮层引入js css-->
+    <script src="/resources/assets/default/js/bkground.js"></script>
+    <link rel="stylesheet" href="/resources/assets/default/css/bkground.css">
+    <!--分页控件引入js-->
+    <script src="/resources/assets/default/js/jqPaginator.min.js"></script>
+    <link rel="stylesheet" href="/resources/assets/default/css/pagination.css">
+
     <script type="text/javascript">
         function setFullScreen(){
             var total = document.documentElement.clientHeight;
@@ -47,7 +54,18 @@
     #parse("common/header.vm")
 
 <div class="main-container" id="main-container">
-
+    <!--弹出层时背景层DIV-->
+    <div id="fade" class="black_overlay">
+    ##	<span style="font-size: 22px; color: white;">数据处理中，请稍候...</span>
+    </div>
+    <div id="MyDiv" class="white_content">
+        <div style="text-align: right; cursor: default; height: 40px;">
+            <span style="font-size: 30px;padding: 15px 23px " onclick="Close2Div('MyDiv','fade')">X</span>
+        </div>
+        <div id="resultMessage" style="padding:0 10px 0 10px; font-size: 16px; ">
+        </div>
+    </div>
+    <!--弹出层时背景层DIV-->
 
         <!-- PAGE CONTENT BEGINS -->
         $screen_content

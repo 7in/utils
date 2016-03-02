@@ -3,7 +3,7 @@
 		 
     <parent>
         <artifactId>strategy</artifactId>
-        <groupId>com.cainiao.strategy</groupId>
+        <groupId>com.simon7in.strategy</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -137,63 +137,12 @@
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.taobao.terminator</groupId>
-            <artifactId>terminator-client-standalone</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.common.tfs</groupId>
-            <artifactId>tfs-client-restful</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>slf4j-log4j12</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.taobao.hsf</groupId>
-            <artifactId>hsf-standalone</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.hsf</groupId>
-            <artifactId>hsf.app.spring</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.test</groupId>
-            <artifactId>itest</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.hsf</groupId>
-            <artifactId>hsfunit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.diamond</groupId>
-            <artifactId>diamond-client</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.dts</groupId>
-            <artifactId>dts-client</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
             <version>5.5.1</version>
         </dependency>
         <!--xin-->
-
         <!-- Test -->
         <dependency>
             <!--整合junit和spring-->
@@ -220,67 +169,12 @@
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
         </dependency>
-        <!--TDDL start-->
-        <dependency>
-            <groupId>com.taobao.tddl</groupId>
-            <artifactId>tddl-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.tddl</groupId>
-            <artifactId>tddl-sequence</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.tddl</groupId>
-            <artifactId>tddl-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.pamirs.transaction</groupId>
-            <artifactId>taobao-pamirs-transaction</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-core-asl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-core-lgpl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!--TDDL end-->
-        <!--ibatis-->
+         <!--ibatis-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.taobao.common.dao</groupId>
-            <artifactId>common-dao</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.external</groupId>
-            <artifactId>sourceforge.ibatis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.udc</groupId>
-            <artifactId>udc-client</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>aspectj</groupId>
-                    <artifactId>aspectjweaver</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!--added by jiayu.shenjy-->
+        <!--added-->
     </dependencies>
 
     <build>

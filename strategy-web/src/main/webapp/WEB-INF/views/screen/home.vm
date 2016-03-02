@@ -12,10 +12,10 @@
 <header id="head">
     <div class="container">
     <div class="row">
-        <h1 class="lead">规则中心</h1>
-        <p class="tagline">RULE IS POWER</p>
-        <p><a class="btn btn-default btn-lg" role="button" href="about">WHAT IS RuC</a>
-            <a class="btn btn-action btn-lg" role="button" href="ruleBusiness">USE RuC NOW</a></p>
+        <h1 class="lead">策略中心</h1>
+        <p class="tagline">Strategy</p>
+        <p><a class="btn btn-default btn-lg" role="button" href="about">WHAT IS</a>
+            <a class="btn btn-action btn-lg" role="button" href="sceneList">USE NOW</a></p>
     </div>
 </div>
 </header>

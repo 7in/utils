@@ -10,6 +10,6 @@
 	<!-- 映射 '/' 的路径请求到'home'视图 -->
 	<mvc:view-controller path="/" view-name="index"/>
 	
-	<context:component-scan base-package="com.cainiao.strategy.controllers"/>
+	<context:component-scan base-package="com.simon7in.strategy.controllers"/>
 	 
 </beans>

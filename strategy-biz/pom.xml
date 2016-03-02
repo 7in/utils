@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>strategy</artifactId>
-        <groupId>com.cainiao.strategy</groupId>
+        <groupId>com.simon7in.strategy</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -21,20 +21,12 @@
     <dependencies>
         <!--本地项目的引用-->
         <dependency>
-            <groupId>com.cainiao.strategy</groupId>
+            <groupId>com.simon7in.strategy</groupId>
             <artifactId>strategy-dao</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.cainiao.strategy</groupId>
+            <groupId>com.simon7in.strategy</groupId>
             <artifactId>strategy-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cainiao.strategy</groupId>
-            <artifactId>strategy-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cainiao.strategy</groupId>
-            <artifactId>strategy-client</artifactId>
         </dependency>
         <!--本地项目的引用-->
         <!-- Spring -->
@@ -88,8 +80,6 @@
         </dependency>
 
         <!--xin-->
-
-
         <!-- util -->
         <dependency>
             <groupId>commons-lang</groupId>
@@ -160,77 +150,16 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.taobao.tddl</groupId>
-            <artifactId>tddl-client</artifactId>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba.platform.shared</groupId>-->
-            <!--<artifactId>buc.uc.api</artifactId>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.taobao.terminator</groupId>
-            <artifactId>terminator-client-standalone</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.common.tfs</groupId>
-            <artifactId>tfs-client-restful</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>slf4j-log4j12</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.taobao.hsf</groupId>
-            <artifactId>hsf-standalone</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.taobao.hsf</groupId>
-            <artifactId>hsf.app.spring</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.taobao.test</groupId>
             <artifactId>itest</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.taobao.hsf</groupId>
-            <artifactId>hsfunit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!--<dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-log4j12</artifactId>
-        </dependency>-->
-        <dependency>
-            <groupId>com.taobao.diamond</groupId>
-            <artifactId>diamond-client</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.dts</groupId>
-            <artifactId>dts-client</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
@@ -264,7 +193,7 @@
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
         </dependency>
-    </dependencies>
+       </dependencies>
 
     <build>
         <finalName>${project.artifactId}</finalName>

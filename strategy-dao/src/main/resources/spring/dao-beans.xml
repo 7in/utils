@@ -18,14 +18,14 @@
        <!-- define the SqlSessionFactory -->
        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
               <property name="dataSource" ref="tddlDataSource" />
-              <property name="typeAliasesPackage" value="com.cainiao.solo.entity" />
+              <property name="typeAliasesPackage" value="com.simon7in.strategy.entity" />
               <property name="configLocation" value="classpath:mybatis/myBatisSettings.xml" />
               <property name="mapperLocations" value="classpath:mybatis/sqlMap/*.xml"/>
        </bean>
 
        <!-- scan for mappers and let them be autowired -->
        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-              <property name="basePackage" value="com.cainiao.strategy.dao" />
+              <property name="basePackage" value="com.simon7in.strategy.dao" />
        </bean>
 
 </beans>

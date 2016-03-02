@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>strategy</artifactId>
-        <groupId>com.cainiao.strategy</groupId>
+        <groupId>com.simon7in.strategy</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -18,22 +18,22 @@
     <dependencies>
         <!--本地项目的引用-->
         <dependency>
-            <groupId>com.cainiao.strategy</groupId>
+            <groupId>com.simon7in.strategy</groupId>
             <artifactId>strategy-common</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.cainiao.strategy</groupId>
+            <groupId>com.simon7in.strategy</groupId>
             <artifactId>strategy-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.cainiao.strategy</groupId>
+            <groupId>com.simon7in.strategy</groupId>
             <artifactId>strategy-biz</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.cainiao.strategy</groupId>
+            <groupId>com.simon7in.strategy</groupId>
             <artifactId>strategy-dao</artifactId>
         </dependency>
 
@@ -114,13 +114,6 @@
             <artifactId>velocity-tools</artifactId>
         </dependency>
 
-        <!--xin-->
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba.platform.shared</groupId>-->
-            <!--<artifactId>buc.sso.client</artifactId>-->
-        <!--</dependency>-->
-        <!--xin-->
-
         <!-- Jackson JSON Processor -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -164,7 +157,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
         </dependency>
-
+        <!--scrftoken-->
+        <dependency>
+            <groupId>ecs</groupId>
+            <artifactId>ecs</artifactId>
+        </dependency>
         <!-- Test -->
         <dependency>
             <!--整合junit和spring-->
