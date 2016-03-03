@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Json 解析</title>
+
+    <script type="text/javascript" src="/resources/assets/jsonUtil/head.js"></script>
+
+</head>
+<body>
+<div style="width: 950px; margin: 0 auto; postition: absolute; margin-top: 68px;">
+    <div class="container">
+        <hr />
+        <div class="banner clear">
+            <div>
+                需要验证格式的Json：
+                <div class="linedwrap">
+                        <textarea id="json_input" name="json_input" class="json_input" rows="30" cols="100"
+                                  spellcheck="false" style="resize: both; width: 889px; max-width: 883px;"></textarea></div>
+            </div>
+            <div class="validateButtons clear">
+                <div class="left">
+                    <input name="validate" id="validate" style="margin-top: 4px" type="button" value="验证"
+                    />
+                </div>
+            </div>
+            <pre id="results"></pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>
