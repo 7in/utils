@@ -410,11 +410,30 @@
                 <artifactId>fastjson</artifactId>
                 <version>1.2.6</version>
             </dependency>
+            <!--excel-->
             <dependency>
-                <groupId>com.alibaba.toolkit.common.lang</groupId>
-                <artifactId>lang</artifactId>
-                <version>1.0</version>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>3.7</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>3.7</version>
+            </dependency>
+            <!--excel end-->
+            <!--http start-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>4.4.1</version>
+            </dependency>
+            <!--http end-->
         </dependencies>
     </dependencyManagement>
 
