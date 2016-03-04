@@ -7,12 +7,12 @@
        http://www.springframework.org/schema/context 
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="ossFileUtil" class="com.simon7in.strategy.util.OssFileUtil" init-method="initOssClient">
-		<property name="accessKey" value=""/>
-		<property name="accessSecret" value=""/>
-		<property name="bucketName" value=""/>
-		<property name="endpoint" value=""/>
-	</bean>
+	<!--<bean id="ossFileUtil" class="com.simon7in.strategy.util.OssFileUtil" init-method="initOssClient">-->
+		<!--<property name="accessKey" value=""/>-->
+		<!--<property name="accessSecret" value=""/>-->
+		<!--<property name="bucketName" value=""/>-->
+		<!--<property name="endpoint" value=""/>-->
+	<!--</bean>-->
 
 	<bean id="springContextUtil" class="com.simon7in.strategy.util.SpringContextUtil"/>
 </beans>

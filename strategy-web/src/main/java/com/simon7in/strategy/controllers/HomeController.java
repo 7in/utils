@@ -12,7 +12,6 @@ public class HomeController extends BaseScreen{
     @RequestMapping(value = {"/home","/"},method = RequestMethod.GET)
     public String welcome(ModelMap modelMap) {
         modelMap.put("title","首页-规则广场");
-        super.getMessage();
 
         return "/home";
     }

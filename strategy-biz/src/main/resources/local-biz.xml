@@ -7,10 +7,10 @@
        "
        default-autowire="byName">
 
-    <context:component-scan base-package="com.cainiao.strategy"
+    <context:component-scan base-package="com.simon7in.strategy"
                             use-default-filters="true">
-        <context:include-filter type="regex" expression="com\.cainiao\.strategy\.playback\.handler.*"/>
-        <context:include-filter type="regex" expression="com\.cainiao\.strategy\.util.*"/>
+        <context:include-filter type="regex" expression="com\.simon7in\.strategy\.playback\.handler.*"/>
+        <context:include-filter type="regex" expression="com\.simon7in\.strategy\.util.*"/>
     </context:component-scan>
 
 </beans>

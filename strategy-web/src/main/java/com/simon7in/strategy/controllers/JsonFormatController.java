@@ -11,7 +11,6 @@ public class JsonFormatController extends BaseScreen{
 
     @RequestMapping(value = {"/jsonFormat","/"},method = RequestMethod.GET)
     public String welcome(ModelMap modelMap) {
-        super.getMessage();
 
         return "/jsonFormat";
     }

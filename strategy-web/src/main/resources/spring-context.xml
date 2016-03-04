@@ -16,24 +16,6 @@
 		<property name="forceEncoding" value="false" />
 	</bean>
 
-	<!--sso-->
-	<bean id="ssoFilterBean" class="com.alibaba.buc.sso.client.filter.SSOFilter">
-	<property name="initParams" >
-	<map>
-	<!-- ps:修改app_name成在应用接入方的应用名，此应用名会在buc系统上注册-->
-	<entry key="APP_NAME" value="strategy" />
-	<entry key="SSO_CALLBACK_CLASS" value="com.alibaba.buc.sso.client.handler.impl.BucSSOCallBack" />
-	<!-- 线上应用SS请使用:  https://login.alibaba-inc.com 日常:https://login-test.alibaba-inc.com  -->
-	<!--<entry key="SSO_SERVER_URL" value="${sso.server.url}" />-->
-	<entry key="SSO_SERVER_URL" value="https://login.alibaba-inc.com" />
-	 <!--请修改为注册时由BUC 颁发的值  -->
-	<entry key="CLIENT_KEY" value="${sso.app.key}" />
-	<!--不走sso验证的requestUri(应用请根据实际情况修改)，uri间用半角逗号隔开。*通配任意多个字符，?通配任意单个字符-->
-	<entry key="EXCLUSIONS" value="*/status.taobao,/checkpreload.htm,/login.htm,/logout.htm,/static/*" />
-	</map>
-	</property>
-	</bean>
-
 	<!--去除空格-->
 	<bean id="trimParametersFilterBean" class="com.simon7in.strategy.web.filter.TrimParametersFilter" />
 

@@ -7,86 +7,86 @@
        http://www.springframework.org/schema/context 
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.cainiao.strategy.notify"/>
+    <!--<context:component-scan base-package="com.simon7in.strategy.notify"/>-->
     <!-- ================================================= -->
     <!-- 自发自收消息开始 -->
     <!-- ================================================= -->
-    <bean id="selfNotifyPublishManager" class="com.taobao.notify.remotingclient.NotifyManagerBean" init-method="init">
-        <property name="publishTopics"> <!-- 配置所需发布的topics -->
-            <list>
-                <value>#_topic_#</value><!-- SHENXUN_TEST，EmergencyRelease-->
-            </list>
-        </property>
-        <property name="groupId" value="#_groupId_#"/> <!-- 发送方的GroupId P-appname-detail，P-iWant-EP-->
-    </bean>
-    <!-- 执行回放时自收消息 -->
-    <bean id="selfNotifySubscribeManager" class="com.taobao.notify.remotingclient.NotifyManagerBean" init-method="init">
-        <property name="bindingList">
-            <list>
-                <ref bean="selfPatternBinding"/>
-            </list>
-        </property>
-        <property name="groupId" value="#_groupId_#"/>
-        <property name="messageListener" ref="playbackSelfNotifyListener" />
-    </bean>
-    <bean id="selfPatternBinding" class="com.taobao.notify.subscription.Binding" factory-method="header">
-        <!-- topic -->
-        <constructor-arg  index="0" value="#_topic_#"/>
-        <!--expression-->
-        <constructor-arg index="1">
-            <!--规则see :https://code.google.com/p/aviator/wiki/User_Guide_zh-->
-            <!-- <value><![CDATA[(messageType=='inventory-change') && (property.customHeader!=nil) && (property.customHeader=='12345')]]></value>-->
-            <value><![CDATA[(messageType=='#_messageType_#')]]></value>
-        </constructor-arg>
-        <!--group-->
-        <constructor-arg  index="2" value="#_groupId_#"/>
-        <!--waterMark-->
-        <constructor-arg  index="3" value="-1"/>
-        <!--persistence-->
-        <constructor-arg  index="4" value="true"/>
-    </bean>
-    <bean id="notifyListener" class="com.simon7in.strategy.notify.PlaybackSelfNotifyListener" />
-    <!-- ================================================= -->
-    <!-- 自发自收消息结束 -->
-    <!-- ================================================= -->
-    <!-- ================================================= -->
-    <!-- 和training交互消息开始 -->
-    <!-- ================================================= -->
-    <bean id="toCheckNotifyPublishManager" class="com.taobao.notify.remotingclient.NotifyManagerBean" init-method="init">
-        <property name="publishTopics"> <!-- 配置所需发布的topics -->
-            <list>
-                <value>PlaybackStepCheck</value><!-- SHENXUN_TEST，EmergencyRelease-->
-            </list>
-        </property>
-        <property name="groupId" value="P-strategy-check"/> <!-- 发送方的GroupId P-appname-detail，P-iWant-EP-->
-    </bean>
-    <!-- 接收training消息 -->
-    <bean id="checkResultNotifySubscribeManager" class="com.taobao.notify.remotingclient.NotifyManagerBean" init-method="init">
-        <property name="bindingList">
-            <list>
-                <ref bean="checkResultPatternBinding"/>
-            </list>
-        </property>
-        <property name="groupId" value="S-strategy-check"/>
-        <property name="messageListener" ref="playbackCheckResultNotifyListener" />
-    </bean>
-    <bean id="checkResultPatternBinding" class="com.taobao.notify.subscription.Binding" factory-method="header">
-        <!-- topic -->
-        <constructor-arg  index="0" value="PlaybackStepCheck"/>
-        <!--expression-->
-        <constructor-arg index="1">
-            <!--规则see :https://code.google.com/p/aviator/wiki/User_Guide_zh-->
-            <!-- <value><![CDATA[(messageType=='inventory-change') && (property.customHeader!=nil) && (property.customHeader=='12345')]]></value>-->
-            <value><![CDATA[(messageType=='stepCheckResult')]]></value>
-        </constructor-arg>
-        <!--group-->
-        <constructor-arg  index="2" value="S-strategy-check"/>
-        <!--waterMark-->
-        <constructor-arg  index="3" value="-1"/>
-        <!--persistence-->
-        <constructor-arg  index="4" value="true"/>
-    </bean>
-    <bean id="playbackCheckResultNotifyListener" class="com.simon7in.strategy.notify.PlaybackCheckResultNotifyListener" />
+    <!--<bean id="selfNotifyPublishManager" class="com.taobao.notify.remotingclient.NotifyManagerBean" init-method="init">-->
+        <!--<property name="publishTopics"> &lt;!&ndash; 配置所需发布的topics &ndash;&gt;-->
+            <!--<list>-->
+                <!--<value>#_topic_#</value>&lt;!&ndash; SHENXUN_TEST，EmergencyRelease&ndash;&gt;-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="groupId" value="#_groupId_#"/> &lt;!&ndash; 发送方的GroupId P-appname-detail，P-iWant-EP&ndash;&gt;-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 执行回放时自收消息 &ndash;&gt;-->
+    <!--<bean id="selfNotifySubscribeManager" class="com.taobao.notify.remotingclient.NotifyManagerBean" init-method="init">-->
+        <!--<property name="bindingList">-->
+            <!--<list>-->
+                <!--<ref bean="selfPatternBinding"/>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="groupId" value="#_groupId_#"/>-->
+        <!--<property name="messageListener" ref="playbackSelfNotifyListener" />-->
+    <!--</bean>-->
+    <!--<bean id="selfPatternBinding" class="com.taobao.notify.subscription.Binding" factory-method="header">-->
+        <!--&lt;!&ndash; topic &ndash;&gt;-->
+        <!--<constructor-arg  index="0" value="#_topic_#"/>-->
+        <!--&lt;!&ndash;expression&ndash;&gt;-->
+        <!--<constructor-arg index="1">-->
+            <!--&lt;!&ndash;规则see :https://code.google.com/p/aviator/wiki/User_Guide_zh&ndash;&gt;-->
+            <!--&lt;!&ndash; <value><![CDATA[(messageType=='inventory-change') && (property.customHeader!=nil) && (property.customHeader=='12345')]]></value>&ndash;&gt;-->
+            <!--<value><![CDATA[(messageType=='#_messageType_#')]]></value>-->
+        <!--</constructor-arg>-->
+        <!--&lt;!&ndash;group&ndash;&gt;-->
+        <!--<constructor-arg  index="2" value="#_groupId_#"/>-->
+        <!--&lt;!&ndash;waterMark&ndash;&gt;-->
+        <!--<constructor-arg  index="3" value="-1"/>-->
+        <!--&lt;!&ndash;persistence&ndash;&gt;-->
+        <!--<constructor-arg  index="4" value="true"/>-->
+    <!--</bean>-->
+    <!--<bean id="notifyListener" class="com.simon7in.strategy.notify.PlaybackSelfNotifyListener" />-->
+    <!--&lt;!&ndash; ================================================= &ndash;&gt;-->
+    <!--&lt;!&ndash; 自发自收消息结束 &ndash;&gt;-->
+    <!--&lt;!&ndash; ================================================= &ndash;&gt;-->
+    <!--&lt;!&ndash; ================================================= &ndash;&gt;-->
+    <!--&lt;!&ndash; 和training交互消息开始 &ndash;&gt;-->
+    <!--&lt;!&ndash; ================================================= &ndash;&gt;-->
+    <!--<bean id="toCheckNotifyPublishManager" class="com.taobao.notify.remotingclient.NotifyManagerBean" init-method="init">-->
+        <!--<property name="publishTopics"> &lt;!&ndash; 配置所需发布的topics &ndash;&gt;-->
+            <!--<list>-->
+                <!--<value>PlaybackStepCheck</value>&lt;!&ndash; SHENXUN_TEST，EmergencyRelease&ndash;&gt;-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="groupId" value="P-strategy-check"/> &lt;!&ndash; 发送方的GroupId P-appname-detail，P-iWant-EP&ndash;&gt;-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 接收training消息 &ndash;&gt;-->
+    <!--<bean id="checkResultNotifySubscribeManager" class="com.taobao.notify.remotingclient.NotifyManagerBean" init-method="init">-->
+        <!--<property name="bindingList">-->
+            <!--<list>-->
+                <!--<ref bean="checkResultPatternBinding"/>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="groupId" value="S-strategy-check"/>-->
+        <!--<property name="messageListener" ref="playbackCheckResultNotifyListener" />-->
+    <!--</bean>-->
+    <!--<bean id="checkResultPatternBinding" class="com.taobao.notify.subscription.Binding" factory-method="header">-->
+        <!--&lt;!&ndash; topic &ndash;&gt;-->
+        <!--<constructor-arg  index="0" value="PlaybackStepCheck"/>-->
+        <!--&lt;!&ndash;expression&ndash;&gt;-->
+        <!--<constructor-arg index="1">-->
+            <!--&lt;!&ndash;规则see :https://code.google.com/p/aviator/wiki/User_Guide_zh&ndash;&gt;-->
+            <!--&lt;!&ndash; <value><![CDATA[(messageType=='inventory-change') && (property.customHeader!=nil) && (property.customHeader=='12345')]]></value>&ndash;&gt;-->
+            <!--<value><![CDATA[(messageType=='stepCheckResult')]]></value>-->
+        <!--</constructor-arg>-->
+        <!--&lt;!&ndash;group&ndash;&gt;-->
+        <!--<constructor-arg  index="2" value="S-strategy-check"/>-->
+        <!--&lt;!&ndash;waterMark&ndash;&gt;-->
+        <!--<constructor-arg  index="3" value="-1"/>-->
+        <!--&lt;!&ndash;persistence&ndash;&gt;-->
+        <!--<constructor-arg  index="4" value="true"/>-->
+    <!--</bean>-->
+    <!--<bean id="playbackCheckResultNotifyListener" class="com.simon7in.strategy.notify.PlaybackCheckResultNotifyListener" />-->
     <!-- ================================================= -->
     <!-- 和training交互消息结束 -->
     <!-- ================================================= -->
