@@ -6,28 +6,35 @@
 
     <ol class="breadcrumb">
         <li><a href="home">Home</a></li>
-        <li class="active">详情</li>
+        <li class="active">Json Format</li>
     </ol>
-<script type="text/javascript" src="/resources/assets/jsonUtil/head.js"></script>
-<div class="row">
-    <div style="width: 950px; margin: 0 auto; postition: absolute; margin-top: 68px;">
-        <div class="container">
-            <hr />
-            <div class="banner clear">
-                <div>
-                    需要验证格式的Json：
-                    <div class="linedwrap">
+    <div class="row">
+        <article class="col-xs-12 maincontent">
+        ##       查询表单
+            <div style="width: 950px; margin: 0 auto; postition: absolute; margin-top: 68px;">
+                <div class="container">
+                    <hr/>
+                    <div class="banner clear">
+                        <div>
+                            需要验证格式的Json：
+                            <div class="linedwrap">
                         <textarea id="json_input" name="json_input" class="json_input" rows="30" cols="100"
-                                  spellcheck="false" style="resize: both; width: 889px; max-width: 883px;"></textarea></div>
-                </div>
-                <div class="validateButtons clear">
-                    <div class="left">
-                        <input name="validate" id="validate" style="margin-top: 4px" type="button" value="验证"
-                        />
+                                  spellcheck="false" style="resize: both; width: 889px; max-width: 883px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="validateButtons clear">
+                            <div class="left">
+                                <input name="validate" id="validate" style="margin-top: 4px" type="button" value="验证"
+                                />
+                            </div>
+                        </div>
+                        <pre id="results"></pre>
                     </div>
                 </div>
-                <pre id="results"></pre>
             </div>
-        </div>
+        </article>
+        <!-- /Article -->
     </div>
 </div>
+<script type="text/javascript" src="/resources/assets/jsonUtil/head.js"></script>
+
