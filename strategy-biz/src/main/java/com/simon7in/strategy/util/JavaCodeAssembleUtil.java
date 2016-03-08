@@ -14,7 +14,7 @@ public class JavaCodeAssembleUtil {
     private static final String JAVA_BEAN_PLACE_HOLDER = "_javaBeanPlaceHolder_";
 
     static String headImport = "package tmp;\n" +
-            "import ScriptInvoker;\n" +
+            "import com.simon7in.strategy.util.ScriptInvoker;\n" +
             "import javax.annotation.Resource;\n" +
             "import org.slf4j.Logger;\n" +
             "import org.slf4j.LoggerFactory;\n" +
