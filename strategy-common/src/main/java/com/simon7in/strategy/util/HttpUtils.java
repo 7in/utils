@@ -1,23 +1,26 @@
 package com.simon7in.strategy.util;
 
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.lang.StringUtils;
-
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,103 +30,128 @@ import java.util.Map.Entry;
  * To change this template use File | Settings | File Templates.
  */
 public class HttpUtils {
+
     private static Logger logger = LoggerFactory.getLogger(HttpUtils.class);
-    private final static Integer TIME_OUT_CONN = 30000;
-    private final static Integer TIME_OUT_SO = 30000;
 
-    public static String getHttpResponse(String url) {
-        if (StringUtils.isEmpty(url)) {
-            return null;
-        }
-        HttpClient httpClient = new HttpClient();
-        //设置默认超时时间
-        httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(TIME_OUT_CONN);
-        httpClient.getHttpConnectionManager().getParams().setSoTimeout(TIME_OUT_SO);
+    public static DefaultHttpClient createHttpClientForNew() {
+        return new DefaultHttpClient();
+    }
 
-        GetMethod httpGet = new GetMethod(url);
-        //设置默认超时时间
-        httpGet.getParams().setSoTimeout(TIME_OUT_SO);
-        httpGet.addRequestHeader("content-type", "application/x-www-form-urlencoded;charset=GBK");
+
+    public static DefaultHttpClient createHttpClientNew() {
+        return new DefaultHttpClient();
+    }
+
+    public static String get(String uri, DefaultHttpClient httpclient) {
+        logger.info("request URL: " + uri);
+        HttpGet httpGet = new HttpGet(uri);
+        HttpEntity entity;
         try {
-            if (httpClient.executeMethod(httpGet) != HttpStatus.SC_OK) {
-                logger.warn("httpGet(\"" + url + "\") failed: "
-                        + httpGet.getStatusLine());
-                return null;
-            }
-            return httpGet.getResponseBodyAsString();
-        } catch (Exception e) {
-            logger.error("[HttpUtils.getHttpResponse] error", e);
-        } finally {
-            httpGet.releaseConnection();
+            httpclient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
+            /*
+            *入参的时候自己组装cookie
+             */
+//             httpclient.setCookieStore(cookieStore);
+            entity = httpclient.execute(httpGet).getEntity();
+            String responseString = EntityUtils.toString(entity, "UTF-8");
+            EntityUtils.consume(entity);
+            //logger.info("return info:" + responseString);
+            return responseString;
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
+        System.out.println("http get error");
+        logger.error("http get error");
         return null;
     }
 
-    public static String urlToStringForPost(Map parameters, String apiUrl, String charset) {
-        URL url = null;
-        HttpURLConnection urlconnection = null;
-        DataInputStream input = null;
-        String str = "";
-        try {
-
-            StringBuffer params = new StringBuffer();
-            for (Iterator iter = parameters.entrySet().iterator(); iter
-                    .hasNext(); ) {
-                Entry element = (Entry) iter.next();
-                params.append(element.getKey().toString());
-                params.append("=");
-                if (element.getValue() != null) {
-                    params.append(URLEncoder.encode(element.getValue().toString(), charset));
-                }
-                params.append("&");
-            }
-
-            if (params.length() > 0) {
-                params = params.deleteCharAt(params.length() - 1);
-            }
-
-
-            url = new URL(apiUrl);
-            urlconnection = (HttpURLConnection) url.openConnection();
-            urlconnection.setRequestMethod("POST");
-            urlconnection.setDoOutput(true);
-            byte[] b = params.toString().getBytes();
-            urlconnection.getOutputStream().write(b, 0, b.length);
-            urlconnection.getOutputStream().flush();
-            urlconnection.getOutputStream().close();
-
-
-            input = new DataInputStream(urlconnection.getInputStream());
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input, charset));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                if (null != line && line != "") {
-                    str += line;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (urlconnection != null) {
-                urlconnection.disconnect();
-            }
-            try {
-                input.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public static String post(String uri, DefaultHttpClient httpclient, Map<String, String> params) throws IOException {
+        logger.info("request URL: " + uri);
+        HttpPost httpPost = new HttpPost(uri);
+        HttpEntity entity;
+            /*
+            *入参的时候自己组装cookie
+             */
+//        httpclient.setCookieStore(cookieStore);
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        Set<String> keySet = params.keySet();
+        for(String key : keySet) {
+            nvps.add(new BasicNameValuePair(key, params.get(key)));
         }
-        return str;
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+            entity = httpclient.execute(httpPost).getEntity();
+            String responseString = EntityUtils.toString(entity);
+            EntityUtils.consume(entity);
+            //logger.info("return info:" + responseString);
+            return responseString;
+        } catch (ClientProtocolException e) {
+            logger.error(e.getMessage());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+        logger.error("http post error");
+        return null;
     }
 
-    public static void main(String args[]) {
-        String arrCharsEnc = URLEncoder.encode("[]");
-        String url = "http://kelude.taobao.net/api/issues/search.json?" +
-                "aone2_id[]=7989";
-//                "&status"+arrCharsEnc+"New";
-//                &status[]=Reopen&status[]=Open&status[]=Fixed&status[]=Closed&status[]=Later&page=1&per_page=500";
-        String baiduUrl = "http://www.baidu.com";
-        String response = getHttpResponse(url);
+    public static  String put(String uri, DefaultHttpClient httpclient, Map<String, String> params) throws IOException{
+        logger.info("request URL: " + uri);
+        HttpPut httpPut = new HttpPut(uri);
+        HttpEntity entity;
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        Set<String> keySet = params.keySet();
+        for(String key : keySet) {
+            nvps.add(new BasicNameValuePair(key, params.get(key)));
+        }
+        try {
+            httpPut.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+            entity = httpclient.execute(httpPut).getEntity();
+            String responseString = EntityUtils.toString(entity);
+            EntityUtils.consume(entity);
+            //logger.info("return info:" + responseString);
+            return responseString;
+        } catch (ClientProtocolException e) {
+            logger.error(e.getMessage());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+        logger.error("http post error");
+        return null;
+    }
+
+
+    public static void main(String args[]) throws IOException {
+
+        String url = "http://www.baidu.com";
+        Map<String, String> parMap = new HashMap<String, String>();
+        parMap.put("method", "scanPackage");
+
+        CookieStore cookieStore = new BasicCookieStore();
+        BasicClientCookie cookie1 = new BasicClientCookie("JSESSIONID", "123");
+        BasicClientCookie cookie2 = new BasicClientCookie("l", "123");
+        BasicClientCookie cookie3 = new BasicClientCookie("tmp0", "123");
+        BasicClientCookie cookie4 = new BasicClientCookie("abc", "123");
+        BasicClientCookie cookie5 = new BasicClientCookie("wmporder0", "123");
+        cookie1.setDomain("www.baidu.com");
+        cookie2.setDomain("www.baidu.com");
+        cookie3.setDomain("www.baidu.com");
+        cookie4.setDomain("www.baidu.com");
+        cookie5.setDomain("www.baidu.com");
+        cookieStore.addCookie(cookie1);
+        cookieStore.addCookie(cookie2);
+        cookieStore.addCookie(cookie3);
+        cookieStore.addCookie(cookie4);
+        cookieStore.addCookie(cookie5);
+        DefaultHttpClient httpClient = createHttpClientForNew();
+        httpClient.setCookieStore(cookieStore);
+        String response = post(url,httpClient, parMap);
+
         System.out.println(response);
     }
 }
