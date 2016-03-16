@@ -21,11 +21,12 @@ import java.util.Locale;
 public class JavaFileCUtil {
    private static Logger logger = LoggerFactory.getLogger(JavaFileCUtil.class);
 
-    public static String exeJavaClass(String javaContent) throws Exception {
+    public static String exeJavaClass(String className,String javaContent) throws Exception {
+
         /**
          * 编译文件
          */
-        Object clazzObj = compile(javaContent);
+        Object clazzObj = compile(className,javaContent);
         /**
          * 注入bean
          */
@@ -50,21 +51,21 @@ public class JavaFileCUtil {
      * @param content
      * @return
      */
-    private static Object compile(String content) throws Exception {
+    private static Object compile(String className,String content) throws Exception {
         /**
          * 将名字换了
          * java字符串文本中,用"_fileName_"作为class name 占位符
          * 这里讲name换掉，以防止重复
          */
-        String fileName = "TmpJavaFile" + System.currentTimeMillis();
-        String javaContent = content.replaceAll("_fileName_", fileName);
+//        String fileName = "TmpJavaFile" + System.currentTimeMillis();
+//        String javaContent = content.replaceAll("_fileName_", fileName);
         File classPath = new File(Thread.currentThread().getContextClassLoader().getResource("").toURI());
         try {
             JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
             DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
 
             StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnostics, null, null);
-            StrSrcJavaObject srcObject = new StrSrcJavaObject(fileName, javaContent);
+            StrSrcJavaObject srcObject = new StrSrcJavaObject(className, content);
             Iterable<? extends JavaFileObject> fileObjects = Arrays.asList(srcObject);
                 /**
             * 获取工程中的jar
@@ -107,7 +108,7 @@ public class JavaFileCUtil {
 
             JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, diagnostics, optionList, null, fileObjects);
             if (task.call()) {
-                logger.error("JavaFileCUtil.compile successfully.fileName=" + fileName);
+                logger.error("JavaFileCUtil.compile successfully.className=" + className);
                 /**
                  *将保存的.class文件加载到classloader
                  */
@@ -115,7 +116,7 @@ public class JavaFileCUtil {
                         new URL[]{classPath.toURL() /*add external jar URL here*/}, JavaFileCUtil.class.getClassLoader());
 
                 // Load the class from the classloader by name....
-                Class<?> loadedClass = classLoader.loadClass("tmp." + fileName);
+                Class<?> loadedClass = classLoader.loadClass("tmp." + className);
                 // Create a new instance...
                 return loadedClass.newInstance();
             } else {
@@ -127,7 +128,7 @@ public class JavaFileCUtil {
                     System.out.format("Error on line %d in %s, %s", diagnostic
                             .getLineNumber(), diagnostic.getSource().toUri(), diagnostic.getMessage(Locale.CHINA));
                 }
-                throw new Exception("JavaFileCUtil.compile fail!fileName=" + fileName
+                throw new Exception("JavaFileCUtil.compile fail!className=" + className
                         +";errorMsg="+new Gson().toJson(javaError));
             }
         } catch (Exception e) {
@@ -143,7 +144,7 @@ public class JavaFileCUtil {
                     }
                 }
             } catch (Exception ioex) {
-                logger.error("JavaFileCUtil.compile error!fileName=" + fileName, ioex);
+                logger.error("JavaFileCUtil.compile error!className=" + className, ioex);
             }
         }
     }
