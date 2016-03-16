@@ -112,13 +112,19 @@ public class JavaFileCUtil {
                 /**
                  *将保存的.class文件加载到classloader
                  */
-                URLClassLoader classLoader = new URLClassLoader(
-                        new URL[]{classPath.toURL() /*add external jar URL here*/}, JavaFileCUtil.class.getClassLoader());
+//                URLClassLoader classLoader = new URLClassLoader(
+//                        new URL[]{classPath.toURL() /*add external jar URL here*/}, JavaFileCUtil.class.getClassLoader());
 
                 // Load the class from the classloader by name....
-                Class<?> loadedClass = classLoader.loadClass("tmp." + className);
+//                Class<?> loadedClass = classLoader.loadClass("tmp." + className);
                 // Create a new instance...
-                return loadedClass.newInstance();
+//                return loadedClass.newInstance();
+
+                /**
+                 * 这里的class name 需要是类的全路径
+                 * 默认的package tmp;
+                 */
+                return Class.forName("tmp." + className);
             } else {
                 List<String> javaError = new ArrayList<String>();
                 for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics
