@@ -75,7 +75,7 @@ public class ActionEventUtil implements BeanFactoryAware {
         return beanName;
     }
     public static void eventInvoke(String beanName, String methodName, List<InputArgBO> inputArgBOs) throws Exception {
-        InvokeMethodUtil.invoke(beanName, methodName, inputArgBOs);
+        InvokeMethodUtil.invokeByBeanName(beanName, methodName, inputArgBOs);
     }
 
     private static List<Method> filter(Method[] methods, String methodName) {
